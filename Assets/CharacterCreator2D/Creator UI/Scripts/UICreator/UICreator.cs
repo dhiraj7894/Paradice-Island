@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 namespace CharacterCreator2D.UI
 {
@@ -12,7 +15,9 @@ namespace CharacterCreator2D.UI
         {
             if (File.Exists("Assets/Game/Prefeb/Player/Player.prefab"))
                 LoadCharacterFromPrefab();
+            startText.text = "Start";
         }
+
         // The following code is used for the UI function such as updating, opening and closing menus, etc.
         #region UI and Menus
 
@@ -139,6 +144,26 @@ namespace CharacterCreator2D.UI
         /// <summary>
         /// [EDITOR] Save character as a prefab in desired path.
         /// </summary>
+        /// 
+
+
+        public TextMeshProUGUI startText;
+        public void onClickStart(float t)
+        {
+            StartCoroutine(onStart(t));
+            startText.text = "Starting...";
+        }
+        public IEnumerator onStart(float t)
+        {
+            yield return new WaitForSeconds(t);
+            //SceneManager.LoadScene("Connect To Server");
+        }
+
+        private static string GetPath()
+        {
+            //return Application.persistentDataPath + "/Player/Player.prefab";
+            return "*/Assets/Game/Prefeb/Player/Player.prefab";
+        }
         public void SaveCharacterAsPrefab()
         {
             if (this.character == null || _processing)
@@ -155,16 +180,20 @@ namespace CharacterCreator2D.UI
             string path = "Assets/Game/Prefeb/Player/Player.prefab";
             //string path = CharacterUtils.ShowSaveFileDialog("Save Character", "New Character", "prefab", true);
 
-            if (!string.IsNullOrEmpty(path))
+            if (!string.IsNullOrEmpty(GetPath()))
             {
-                CharacterViewer tcharacter = CharacterUtils.SpawnCharacter(this.character, path);
+                startText.text = "Getting Character";
+                CharacterViewer tcharacter = CharacterUtils.SpawnCharacter(this.character, GetPath());
                 yield return null;
                 yield return null;
-                CharacterUtils.SaveCharacterToPrefab(tcharacter, path);
+                startText.text = "Saving Prefab";
+                CharacterUtils.SaveCharacterToPrefab(tcharacter, GetPath());
+                /*PrefabUtility.SaveAsPrefabAsset(tcharacter, GetPath());*/
                 yield return null;
                 yield return null;
                 Destroy(tcharacter.gameObject);
-                SceneManager.LoadScene(1);
+                startText.text = "Loading Scene";
+                SceneManager.LoadScene("Connect To Server");
                 //dialog.DisplayDialog("Save Character", "Character is saved to <color=#178294>" + path + "</color> succesfully.");
             }
         #endif
@@ -180,9 +209,9 @@ namespace CharacterCreator2D.UI
             _processing = true;
             string path = "Assets/Game/Prefeb/Player/Player.prefab";
             //string path = CharacterUtils.ShowOpenFileDialog("Load Character", "prefab", true);
-            if (!string.IsNullOrEmpty(path))
+            if (!string.IsNullOrEmpty(GetPath()))
             {
-                CharacterViewer tcharacter = CharacterUtils.LoadCharacterFromPrefab(path);
+                CharacterViewer tcharacter = CharacterUtils.LoadCharacterFromPrefab(GetPath());
                 if (tcharacter == null)
                     return;
 

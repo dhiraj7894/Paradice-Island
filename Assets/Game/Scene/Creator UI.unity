@@ -420,7 +420,7 @@ RectTransform:
   m_Children:
   - {fileID: 1327450367}
   m_Father: {fileID: 797511293}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -40709,12 +40709,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 3402136}
   - {fileID: 1995144610}
   - {fileID: 1917446716}
   - {fileID: 1391106536}
   - {fileID: 1298946598}
   - {fileID: 2045188636}
-  - {fileID: 3402136}
   m_Father: {fileID: 1278717457}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -40738,6 +40738,7 @@ MonoBehaviour:
   character: {fileID: 1180374569}
   colorUI: {fileID: 694790130}
   dialog: {fileID: 582283028}
+  startText: {fileID: 1606495498}
 --- !u!1 &797726824
 GameObject:
   m_ObjectHideFlags: 0
@@ -67226,7 +67227,7 @@ RectTransform:
   - {fileID: 34649112}
   - {fileID: 724511105}
   m_Father: {fileID: 797511293}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -68610,6 +68611,18 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 797511294}
+        m_TargetAssemblyTypeName: CharacterCreator2D.UI.UICreator, Assembly-CSharp
+        m_MethodName: onClickStart
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -71989,7 +72002,7 @@ RectTransform:
   - {fileID: 260456472}
   - {fileID: 694790126}
   m_Father: {fileID: 797511293}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -83221,7 +83234,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -0}
-  m_SizeDelta: {x: 394.899, y: 98.7248}
+  m_SizeDelta: {x: 324.2549, y: 81.0638}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1606495498
 MonoBehaviour:
@@ -83270,7 +83283,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 88.35
+  m_fontSize: 72.55
   m_fontSizeBase: 59.82
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -100103,7 +100116,7 @@ RectTransform:
   - {fileID: 104857126}
   - {fileID: 2132911528}
   m_Father: {fileID: 797511293}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -104095,7 +104108,7 @@ RectTransform:
   - {fileID: 176759845}
   - {fileID: 1342211771}
   m_Father: {fileID: 797511293}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -106811,7 +106824,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 797511293}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
