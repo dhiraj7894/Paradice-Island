@@ -7,6 +7,10 @@ namespace iland.move
 {
     public class movePlayer : MonoBehaviour
     {
+
+
+
+        [Header("AI")]
         public Pathfinding.AIDestinationSetter AIDestinationSetter;
         public Pathfinding.AIPath aIPath;
         public Animator animator;

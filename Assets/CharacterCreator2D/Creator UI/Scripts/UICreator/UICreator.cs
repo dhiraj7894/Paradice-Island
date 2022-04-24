@@ -13,8 +13,10 @@ namespace CharacterCreator2D.UI
     {
         private void Start()
         {
-            if (File.Exists("Assets/Game/Prefeb/Player/Player.prefab"))
+
+            if (File.Exists(GetPath()))
                 LoadCharacterFromPrefab();
+            
             startText.text = "Start";
         }
 
@@ -148,6 +150,7 @@ namespace CharacterCreator2D.UI
 
 
         public TextMeshProUGUI startText;
+        private static string pathData;
         public void onClickStart(float t)
         {
             StartCoroutine(onStart(t));
@@ -157,15 +160,20 @@ namespace CharacterCreator2D.UI
         {
             yield return new WaitForSeconds(t);
             //SceneManager.LoadScene("Connect To Server");
+            
         }
 
         private static string GetPath()
         {
-            //return Application.persistentDataPath + "/Player/Player.prefab";
-            return "*/Assets/Game/Prefeb/Player/Player.prefab";
+            //return "Assets/Data/Player.prefab";
+            //return "Assets/Game/Prefeb/Player/Player.prefab";
+            string a = "Assets/Data/Player.prefab";
+            a = AssetDatabase.GenerateUniqueAssetPath(a);
+            return a;
         }
         public void SaveCharacterAsPrefab()
         {
+
             if (this.character == null || _processing)
                 return;
             StartCoroutine("ie_savecharaasprefab");
@@ -175,12 +183,17 @@ namespace CharacterCreator2D.UI
         {
             _processing = true;
             yield return null;
-        #if UNITY_EDITOR
+        //#if UNITY_EDITOR
 
             string path = "Assets/Game/Prefeb/Player/Player.prefab";
-            //string path = CharacterUtils.ShowSaveFileDialog("Save Character", "New Character", "prefab", true);
+            //string path = CharacterUtils.ShowSaveFileDialog("Save Character", "New Character", "prefab", true);            
 
-            if (!string.IsNullOrEmpty(GetPath()))
+            if (string.IsNullOrEmpty(GetPath()))
+            {
+                startText.text = "Error in Finding !";
+            }
+
+                if (!string.IsNullOrEmpty(GetPath()))
             {
                 startText.text = "Getting Character";
                 CharacterViewer tcharacter = CharacterUtils.SpawnCharacter(this.character, GetPath());
@@ -188,7 +201,7 @@ namespace CharacterCreator2D.UI
                 yield return null;
                 startText.text = "Saving Prefab";
                 CharacterUtils.SaveCharacterToPrefab(tcharacter, GetPath());
-                /*PrefabUtility.SaveAsPrefabAsset(tcharacter, GetPath());*/
+                //PrefabUtility.SaveAsPrefabAssetAndConnect(tcharacter.gameObject, GetPath(), InteractionMode.UserAction);
                 yield return null;
                 yield return null;
                 Destroy(tcharacter.gameObject);
@@ -196,7 +209,7 @@ namespace CharacterCreator2D.UI
                 SceneManager.LoadScene("Connect To Server");
                 //dialog.DisplayDialog("Save Character", "Character is saved to <color=#178294>" + path + "</color> succesfully.");
             }
-        #endif
+        //#endif
             _processing = false;
         }
 
@@ -205,7 +218,7 @@ namespace CharacterCreator2D.UI
         /// </summary>
         public void LoadCharacterFromPrefab()
         {
-#if UNITY_EDITOR
+//#if UNITY_EDITOR
             _processing = true;
             string path = "Assets/Game/Prefeb/Player/Player.prefab";
             //string path = CharacterUtils.ShowOpenFileDialog("Load Character", "prefab", true);
@@ -221,7 +234,7 @@ namespace CharacterCreator2D.UI
                 //dialog.DisplayDialog("Load Character", "Character from <color=#178294>" + path + "</color> is loaded succesfully.");
             }
             _processing = false;
-#endif        
+//#endif        
         }
 
         /// <summary>
